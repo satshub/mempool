@@ -136,8 +136,9 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
   taprootEnabled: boolean;
   hasEffectiveFeeRate: boolean;
   accelerateCtaType: 'alert' | 'button' = 'button';
-  acceleratorAvailable: boolean = this.stateService.env.OFFICIAL_MEMPOOL_SPACE && this.stateService.env.ACCELERATOR && this.stateService.network === '';
+  acceleratorAvailable: boolean = this.stateService.env.ACCELERATOR && this.stateService.network === '';
   showAccelerationSummary = false;
+  showAccelerationDetails = false;
   scrollIntoAccelPreview = false;
   auditEnabled: boolean = this.stateService.env.AUDIT && this.stateService.env.BASE_MODULE === 'mempool' && this.stateService.env.MINING_DASHBOARD === true;
 
@@ -166,15 +167,13 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.acceleratorAvailable = this.stateService.env.OFFICIAL_MEMPOOL_SPACE && this.stateService.env.ACCELERATOR && this.stateService.network === '';
-
     this.enterpriseService.page();
 
     this.websocketService.want(['blocks', 'mempool-blocks']);
     this.stateService.networkChanged$.subscribe(
       (network) => {
         this.network = network;
-        this.acceleratorAvailable = this.stateService.env.OFFICIAL_MEMPOOL_SPACE && this.stateService.env.ACCELERATOR && this.stateService.network === '';
+        this.acceleratorAvailable = this.stateService.env.ACCELERATOR && this.stateService.network === '';
       }
     );
 
