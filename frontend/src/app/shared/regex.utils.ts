@@ -229,7 +229,7 @@ export function getRegex(type: RegexType, network?: Network): RegExp {
           leadingZeroes = 8; // Assumes at least 32 bits of difficulty
           break;
         case `signet`:
-          leadingZeroes = 6; //https://github.com/mempool/mempool/issues/4529
+          leadingZeroes = 5; 
           break;
         case `liquid`:
           leadingZeroes = 8; // We are not interested in Liquid block hashes
